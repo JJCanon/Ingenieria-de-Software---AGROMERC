@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: green;
+    font-family: "calibri";
+}
+
+header {
+    background: url('Fondo.jpg');
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+section {
+    min-width: 1000px;
+    margin: auto;
+    padding: 5px 0;
+}
+
+section h1 {
+    font-size: 44px;
+}
+
+.conte {
+    text-align: center;
+}
+
+.conte p {
+    font-size: 60px;
+    font-weight: bold;
+    margin: 1em 0;
+}

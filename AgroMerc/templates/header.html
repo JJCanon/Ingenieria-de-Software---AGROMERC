@@ -1,28 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block head %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroMerc</title>
+    <link rel="stylesheet" href="CSS's/header.css">
+    <title>Document</title>
+    {% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    AgroMerc
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item">Carrito</a></li>
-                </ul>
-            </li>
-    </nav>
-
+    <header>
+        <section>
+            <div class="conte">
+                <p>AgroMerc</p>
+            </div>
+        </section>
+    </header>
     {% block content %}
 
     {% endblock %}
