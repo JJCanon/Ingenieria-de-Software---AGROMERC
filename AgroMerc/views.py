@@ -17,7 +17,4 @@ print(client.list_database_names())
 def header(request):
     return render(request, 'header.html')
 
-# index
-def index(request):
-    return render(request, 'index.html')
 

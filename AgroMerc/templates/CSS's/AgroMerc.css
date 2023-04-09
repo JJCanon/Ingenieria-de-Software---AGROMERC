@@ -7,19 +7,13 @@
 body {
     color: green;
     font-family: "calibri";
-}
-
-header {
-    background: url('Fondo.jpg');
-    height: 150px;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-color: rgb(105, 230, 105);
 }
 
 section {
-    min-width: 1000px;
+    min-width: 0px;
     margin: auto;
-    padding: 5px 0;
+    padding: 0px 0;
 }
 
 section h1 {
@@ -34,4 +28,14 @@ section h1 {
     font-size: 60px;
     font-weight: bold;
     margin: 1em 0;
+}
+
+.conte h3 {
+     font-weight: bold;
+     height: auto;
+}
+
+.nombres {
+    text-align: end;
+    color: black;
 }

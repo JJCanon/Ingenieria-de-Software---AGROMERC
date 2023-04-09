@@ -1,0 +1,27 @@
+* {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color:  rgb(105, 230, 105);
+}
+
+.registro {
+    color: hsl(133, 89%, 29%);
+    text-align: center;
+}
+
+.registro form {
+    background-color: rgb(70, 240, 141);
+    width: 10cm;
+    height: 10cm;
+}
+
+.registro label {
+    text-align: center;
+    text-indent: 200cm;
+    font-size: x-large;
+}
+
