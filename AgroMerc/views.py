@@ -13,8 +13,15 @@ colClientes = db['Clientes']
 colProductos = db['Productos']
 print(client.list_database_names())
 
-#header
-def header(request):
-    return render(request, 'header.html')
+#AgroMerc
+def AgroMerc(request):
+    return render(request, 'AgroMerc.html')
 
+#signIn
+def signIn(request):
+    return render(request,'signIn.html')
+
+#signUp
+def signUp(request):
+    return render(request, 'signUp.html')
 

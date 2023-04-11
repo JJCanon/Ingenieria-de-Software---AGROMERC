@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS's/signUp.css">
     <title>Sign UP</title>
 </head>
 <body>
-    
+    <header>
+        <img src="CSS's/AgroMerc.jpg" alt="" width="300">
+    </header>
+    <div class="registro">
+        <h1>por favor ingrese sus datos</h1>
+        <form action="registrar" method="post">
+            <label>Nombres Completos</label> <input type="text" name="nombres"><br>
+            <label>Apelldos Completos</label><input type="text" name="apellidos"><br>
+            <label>No. de Cédula</label><input type="text" name="cedula"><br>
+            <label>Nombre de Usuario</label><input type="text" name="nameUser"><br>
+            <label>Tipo de Usuario</label><select name="typeUser" id="TyUs"><option value="Saler">Vendedor</option><option value="shopper">Comprador</option></select><br>
+            <label>Contraseña</label> <input type="password" name="password" id=""><br>
+
+            <input type="submit" value="Registrar" style="width: 100px; height: 50px;">
+        </form>
+    </div>
+    <footer>
+        
+    </footer>
 </body>
 </html>

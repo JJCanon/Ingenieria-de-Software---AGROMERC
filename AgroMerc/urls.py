@@ -19,5 +19,7 @@ from AgroMerc.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('header/',header )
+    path('AgroMerc/',AgroMerc),
+    path('signUp/', signUp),
+    path('signIn/', signUp),
 ]
