@@ -28,11 +28,12 @@ section h1 {
     font-size: 60px;
     font-weight: bold;
     margin: 1em 0;
+    color: greenyellow;
 }
 
 .conte h3 {
-     font-weight: bold;
-     height: auto;
+    font-weight: bold;
+    height: auto;
 }
 
 .nombres {
