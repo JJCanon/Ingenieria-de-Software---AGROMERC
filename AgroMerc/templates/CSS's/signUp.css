@@ -1,24 +1,6 @@
-* {
-    margin: auto;
-    padding: 0;
-    box-sizing: border-box;
+.columna {
+    display: flex;
 }
-
-body {
-    background-color:  rgb(105, 230, 105);
-}
-
-.registro {
-    color: greenyellow;
-    text-align: center;
-}
-
-.registro form{
-    background-color: rgb(70, 240, 141);
-    width: 10cm;
-    height: 10cm;
-}
-.registro label {
-    color: black;
-    font-size: x-large;
+.contenido{
+    display: flex;
 }
