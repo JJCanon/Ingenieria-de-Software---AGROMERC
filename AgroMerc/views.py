@@ -1,7 +1,11 @@
 # Mongo
 from pymongo import MongoClient
 
-from django.shortcuts import render
+#django
+from django.shortcuts import render,redirect
+from .forms import *
+from django.template import loader
+
 
 #conexion al cliente de MongoDb server
 client = MongoClient(
@@ -23,5 +27,15 @@ def signIn(request):
 
 #signUp
 def signUp(request):
+    if request.method == 'POST':
+        name=str(request.POST["name"])
+        surnames=str(request.POST["surnames"])
+        cedula=str(request.POST["cedula"])
+        phoneNumber=str(request.POST["phoneNumber"])
+        email=str(request.POST["email"])
+        userName=str(request.POST["username"])
+        password=str(request.POST["password"])
+        typeUser=str(request.POST["typeUser"])
+        print(name,surnames,cedula,phoneNumber,email,userName,password,typeUser)
     return render(request, 'signUp.html')
 
