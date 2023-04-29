@@ -22,9 +22,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('AgroMerc/',AgroMerc),
-    path('signUp/', signUp),
-    path('signIn/', signUp),
+    path('AgroMerc/',AgroMerc, name="AgroMerc"),
+    path('signUp/', signUp,name="signUp" ),
+    path('signIn/', signIn, name="signIn"),
 ]
 
 #configuración Url para imagenes

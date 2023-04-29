@@ -23,6 +23,10 @@ def AgroMerc(request):
 
 #signIn
 def signIn(request):
+    if request.method == 'POST':
+        nameUser=str(request.POST["nameUser"])
+        password=str(request.POST["password"])
+        print(nameUser,password)
     return render(request,'signIn.html')
 
 #signUp

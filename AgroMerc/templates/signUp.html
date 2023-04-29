@@ -43,6 +43,7 @@
             </div>
         </div>
         <!-- Header -->
+        <!--contenido-->
         <div class="contenido">
             <div class="col-md-2">
                 <h1>contenido</h1>
@@ -50,8 +51,9 @@
             <div class="col-md-7" style="align-content: center;">
                 <!-- Form -->
                 <div class="form-control">
-                    <form action="#" method="post">
+                    <form method="post">
                         <div class="col-md-12">
+                            {% csrf_token %}
                             <div class="mb-6">
                                 <div class="form-text">
                                     <label for="signUp">Nombres Completos</label>
@@ -126,5 +128,6 @@
                 <h1>contenido</h1>
             </div>
         </div>
+        <!--contenido-->
     </body>
 </html>
