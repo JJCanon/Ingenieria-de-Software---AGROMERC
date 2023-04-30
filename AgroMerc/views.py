@@ -13,8 +13,8 @@ client = MongoClient(
 #Base de datos
 db = client['AgroMerc']
 #Colecciones
-colClientes = db['Clientes']
-colProductos = db['Productos']
+colClients = db['Clientes']
+colProducts = db['Productos']
 print(client.list_database_names())
 
 #AgroMerc
@@ -31,6 +31,10 @@ def signIn(request):
 
 #signUp
 def signUp(request):
+    #boolean data
+    existCedula,existEmail,existUserName=False
+    registered=False
+    context={"exist":False,"registered":registered}
     if request.method == 'POST':
         name=str(request.POST["name"])
         surnames=str(request.POST["surnames"])
@@ -40,6 +44,24 @@ def signUp(request):
         userName=str(request.POST["username"])
         password=str(request.POST["password"])
         typeUser=str(request.POST["typeUser"])
-        print(name,surnames,cedula,phoneNumber,email,userName,password,typeUser)
-    return render(request, 'signUp.html')
+        for nombre in colClients.find():
+            if(nombre['NameUser']==userName):
+                existUserName=True
+                break
+            elif(nombre['Cedula']==cedula):
+                existCedula=True
+                break
+            elif(nombre['Email']==email):
+                existEmail=True
+                break
+            else:
+                registered=True
+                """guardar datos en Base de Datos"""
+        if(existUserName):
+            context={"errorUserName":"el usuario "+userName+" ya existe, intente uno diferente","exist":True,"registered":registered}
+        if(existEmail):
+            context={"erroEmail":"el email "+cedula+" ya está registrado a otro usuario, intente uno diferente","exist":True,"registered":registered}
+        if(existCedula):
+            context={"errorCedula":"la cedula ya se encuentra registrada", "exist":True,"registered":registered}
+    return render(request, 'signUp.html', context)
 
