@@ -49,11 +49,34 @@
                 <h1>contenido</h1>
             </div>
             <div class="col-md-7" style="align-content: center;">
-                <div class="row">
-                    <div class="h-100">
-                        <h1 class="h-100">Somos AgroMerc</h1>
-                    </div>
+                {% if %}
+                <!-- Form -->
+                <div class="form-control">
+                    <form method="post">
+                        <div class="col-md-12">
+                            {% csrf_token %}
+                            <div class="mb-6">
+                                <div class="form-text">
+                                    <label for="signUp">Nombres de Usuario o Correo</label>
+                                </div>
+                                <input class="form-control" type="text"
+                                    name="nameUser" id="nameUser">
+                            </div>
+                            <div class="md-5">
+                                <div class="form-text">
+                                    <label for="signUp">Contraseña</label>
+                                </div>
+                                <input class="form-control" type="password"
+                                    name="password" id="password">
+                            </div>
+                            <div class="md-5">
+                                <button type="submit" class="btn btn-primary
+                                    mb-3">Ingresar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+                <!-- Form -->
             </div>
             <div class="col-md-2">
                 <h1>contenido</h1>

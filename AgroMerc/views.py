@@ -26,8 +26,27 @@ def signIn(request):
     if request.method == 'POST':
         nameUser=str(request.POST["nameUser"])
         password=str(request.POST["password"])
-        print(nameUser,password)
-    return render(request,'signIn.html')
+        exist=False
+        correctPassword=False
+        ingreso=False
+        #verificar si existe el usuario y ver que es correcta la contraseña
+        for users in colClients.find():
+            #verificar usuario o correo
+            if(nameUser==users['nameUser'] or nameUser==users['Email']):
+                exist=True
+                #verificar contraseña 
+                if(password==users['Password']):
+                    correctPassword=True
+                    ingreso=True
+                    break
+        if(not exist):
+            texto="el Correo o Nombre no existe, verifique o realice el registro"
+        if(not correctPassword):
+            texto ="la contraseña es incorrecta, intente nuevamente"
+        if(ingreso):
+            redirect("/main")
+        context={"existeCuenta":exist,"CorrectPassword":correctPassword,"Ingreso":ingreso, "Respuesta":texto}
+    return render(request,'signIn.html',context)
 
 #signUp
 def signUp(request):
@@ -48,7 +67,7 @@ def signUp(request):
         userName=str(request.POST["username"])
         password=str(request.POST["password"])
         userType=str(request.POST.get('typeUser'))
-        print(name,surnames,cedula,phoneNumber,email,password,userType)
+        #print(name,surnames,cedula,phoneNumber,email,password,userType)
         for nombre in colClients.find():
             if(nombre['UserName']==userName):
                 existUserName=True
@@ -76,3 +95,7 @@ def signUp(request):
                  "registered":registered}
     return render(request, 'signUp.html', context)
 
+def main(request):
+    
+    context={}
+    return render(request, 'main.html',context)
