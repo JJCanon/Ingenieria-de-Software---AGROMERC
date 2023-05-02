@@ -41,11 +41,12 @@ def signIn(request):
                     break
         if(not exist):
             texto="el Correo o Nombre no existe, verifique o realice el registro"
-        if(not correctPassword):
+        elif(not correctPassword):
             texto ="la contraseña es incorrecta, intente nuevamente"
         if(ingreso):
-            redirect("/main")
-        context={"existeCuenta":exist,"CorrectPassword":correctPassword,"Ingreso":ingreso, "Respuesta":texto}
+            #redireccionar a el main
+            ingreso=True
+        context={"existeCuenta":exist,"correctPassword":correctPassword,"Ingreso":ingreso, "Respuesta":texto}
     return render(request,'signIn.html',context)
 
 #signUp

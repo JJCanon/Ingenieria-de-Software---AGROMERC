@@ -49,7 +49,7 @@
                 <h1>contenido</h1>
             </div>
             <div class="col-md-7" style="align-content: center;">
-                {% if %}
+                {% if not Ingreso %}
                 <!-- Form -->
                 <div class="form-control">
                     <form method="post">
@@ -71,12 +71,23 @@
                             </div>
                             <div class="md-5">
                                 <button type="submit" class="btn btn-primary
-                                    mb-3">Ingresar</button>
+                                    mb-3">Ingresar
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
+                {% if not existeCuenta or not correctPass %}
+                <div class="md-4">
+                    <h1>{{ Respuesta }}</h1>
+                </div>
+                {% endif %}
                 <!-- Form -->
+                {% else %}
+                <h1 class="ingresoExitoso">
+                    Ingreso exitoso, redireccionando a la pagina principal
+                </h1>
+                {% endif %}
             </div>
             <div class="col-md-2">
                 <h1>contenido</h1>
