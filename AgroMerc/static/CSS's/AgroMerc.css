@@ -1,42 +1,6 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.columna {
+    display: flex;
 }
-
-body {
-    color: green;
-    font-family: "calibri";
-    background-color: rgb(105, 230, 105);
-}
-
-section {
-    min-width: 0px;
-    margin: auto;
-    padding: 0px 0;
-}
-
-section h1 {
-    font-size: 44px;
-}
-
-.conte {
-    text-align: center;
-}
-
-.conte p {
-    font-size: 60px;
-    font-weight: bold;
-    margin: 1em 0;
-    color: greenyellow;
-}
-
-.conte h3 {
-    font-weight: bold;
-    height: auto;
-}
-
-.nombres {
-    text-align: end;
-    color: black;
+.contenido{
+    display: flex;
 }
