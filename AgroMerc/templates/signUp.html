@@ -31,12 +31,11 @@
                             <h1>AgroMerc</h1>
                         </div>
                         <div class="col-2" style="margin: auto;">
-                            <button type="button" class="btn btn-dark"
-                                style="position: static;"><a
-                                    class="link-opacity-100" href="#">sign Up</a></button>
-                            <button type="button" class="btn btn-light"><a
-                                    href="#">Sign
-                                    In</a></button>
+                            <button type="button" class="btn btn-light">
+                                <a href="#">
+                                    Sign In
+                                </a>
+                            </button>
                         </div>
                     </div>
                 </header>
@@ -49,6 +48,7 @@
                 <h1>contenido</h1>
             </div>
             <div class="col-md-7" style="align-content: center;">
+                {% if not registered %}
                 <!-- Form -->
                 <div class="form-control">
                     <form method="post">
@@ -74,6 +74,11 @@
                                 </div>
                                 <input type="text" class="form-control"
                                     name="cedula" id="cedula">
+                                {% if existCedula %}
+                                <div class="md-5">
+                                    <p style="color: red;">{{ textCedula }}</p>
+                                </div>
+                                {% endif %}
                             </div>
                             <div class="md-5">
                                 <div class="form-text">
@@ -89,6 +94,11 @@
                                 <input type="text" class="form-control"
                                     name="email" id="email"
                                     placeholder="example@example.com">
+                                {% if existEmail %}
+                                <div class="md-5">
+                                    <p style="color: red;">{{ textEmail }}</p>
+                                </div>
+                                {% endif %}
                             </div>
                             <div class="md-5">
                                 <div class="form-text">
@@ -96,6 +106,13 @@
                                 </div>
                                 <input type="text" class="form-control"
                                     name="username" id="username">
+                                {% if existUsername %}
+                                <div class="md-5">
+                                    <p style="color: red;">
+                                        {{ textUsername }}
+                                    </p>
+                                </div>
+                                {% endif %}
                             </div>
                             <div class="md-5">
                                 <div class="form-text">
@@ -123,6 +140,13 @@
                     </form>
                 </div>
                 <!-- Form -->
+                {% else %}
+                <div class="col-md-12">
+                    <h1 class="h-100">
+                        Usuario Registrado con exito
+                    </h1>
+                </div>
+                {% endif %}
             </div>
             <div class="col-md-2">
                 <h1>contenido</h1>

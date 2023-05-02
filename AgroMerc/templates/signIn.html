@@ -32,11 +32,11 @@
                         </div>
                         <div class="col-2" style="margin: auto;">
                             <button type="button" class="btn btn-dark"
-                                style="position: static;"><a
-                                    class="link-opacity-100" href="#">sign Up</a></button>
-                            <button type="button" class="btn btn-light"><a
-                                    href="#">Sign
-                                    In</a></button>
+                                style="position: static;">
+                                <a class="link-opacity-100" href="#">
+                                    sign Up
+                                </a>
+                            </button>
                         </div>
                     </div>
                 </header>
@@ -51,35 +51,9 @@
             <div class="col-md-7" style="align-content: center;">
                 <div class="row">
                     <div class="h-100">
-                        <h1>Por favor inicie sesión para acceder</h1>
+                        <h1 class="h-100">Somos AgroMerc</h1>
                     </div>
                 </div>
-                <!--form-->
-                <div class="form-control">
-                    <form method="post">
-                        <div class="col-md-12">
-                            {% csrf_token %}
-                            <div class="mb-6">
-                                <div class="form-text">
-                                    <label for="signIn" class="form-label">Nombre
-                                        de Usuario o Correo</label>
-                                </div>
-                                <input class="form-control" type="text"
-                                    name="nameUser" id="nameUser"
-                                    placeholder="Example ó example@example.com">
-                            </div>
-                            <div class="mb-5">
-                                <div class="form-text">
-                                    <label for="signIn" class="form-label">Contraseña</label>
-                                </div>
-                                <input class="form-control" type="password"
-                                    name="password" id="password">
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-3">Ingresar</button>
-                        </div>
-                    </form>
-                </div>
-                <!--form-->
             </div>
             <div class="col-md-2">
                 <h1>contenido</h1>

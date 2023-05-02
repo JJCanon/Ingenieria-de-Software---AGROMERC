@@ -32,9 +32,13 @@ def signIn(request):
 #signUp
 def signUp(request):
     #boolean data
-    existCedula,existEmail,existUserName=False
+    existCedula=False
+    existEmail=False
+    existUserName=False
     registered=False
-    context={"exist":False,"registered":registered}
+    textUsername=""
+    textCedula=""
+    textEmail=""
     if request.method == 'POST':
         name=str(request.POST["name"])
         surnames=str(request.POST["surnames"])
@@ -43,25 +47,32 @@ def signUp(request):
         email=str(request.POST["email"])
         userName=str(request.POST["username"])
         password=str(request.POST["password"])
-        typeUser=str(request.POST["typeUser"])
+        userType=str(request.POST.get('typeUser'))
+        print(name,surnames,cedula,phoneNumber,email,password,userType)
         for nombre in colClients.find():
-            if(nombre['NameUser']==userName):
+            if(nombre['UserName']==userName):
                 existUserName=True
-                break
-            elif(nombre['Cedula']==cedula):
+            if(nombre['Cedula']==cedula):
                 existCedula=True
-                break
-            elif(nombre['Email']==email):
+            if(nombre['Email']==email):
                 existEmail=True
-                break
-            else:
+        if(not existUserName and not existEmail and not existEmail):
                 registered=True
-                """guardar datos en Base de Datos"""
+                #guardar datos en Base de Datos 
+                datos = {"Name":name,"Surnames":surnames,"Cedula":cedula,
+                         "PhoneNumbe":phoneNumber,"Email":email,
+                         "UserName":userName,"Password":password,
+                         "TypeUser":userType}
+                colClients.insert_one(datos)
         if(existUserName):
-            context={"errorUserName":"el usuario "+userName+" ya existe, intente uno diferente","exist":True,"registered":registered}
+            textUsername=" el usuario "+userName+" ya existe, intente uno diferente"
+            print(existUserName,textUsername)
         if(existEmail):
-            context={"erroEmail":"el email "+cedula+" ya está registrado a otro usuario, intente uno diferente","exist":True,"registered":registered}
+            textEmail=" el email "+email+" ya está registrado a otro usuario, intente uno diferente"
         if(existCedula):
-            context={"errorCedula":"la cedula ya se encuentra registrada", "exist":True,"registered":registered}
+            textCedula="la cedula ya se encuentra registrada"
+    context={"textUsername":textUsername, "textEmail":textEmail,"textCedula":textCedula,
+                 "existUserName":existUserName,"existEmail":existEmail,"existCedula":existCedula,
+                 "registered":registered}
     return render(request, 'signUp.html', context)
 
