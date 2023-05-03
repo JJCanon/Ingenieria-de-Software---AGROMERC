@@ -120,10 +120,9 @@ USE_TZ = True
 
 STATIC_URL = 'AgroMerc/static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-#imagenes
-MEDIA_URL = '/AgroMerc/media/'
 
 MEDIA_ROOT = (os.path.join(BASE_DIR, "AgroMerc/static/CSS's"))
 #archivos Css's

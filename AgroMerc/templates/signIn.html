@@ -34,8 +34,8 @@
                         <div class="col-2" style="margin: auto;">
                             <button type="button" class="btn btn-dark"
                                 style="position: static;">
-                                <a class="link-opacity-100" href="{% url
-                                    'signUp' %}">
+                                <a class="link-opacity-100"
+                                    href="{% url 'signUp' %}">
                                     sign Up
                                 </a>
                             </button>
@@ -97,9 +97,9 @@
                 {% endif %}
                 <!-- Form -->
                 {% else %}
-                <h1 class="ingresoExitoso h-100" style="color: red;">
+                <h2 class="h2 alert-info">
                     Ingreso exitoso, redireccionando a la pagina principal
-                </h1>
+                </h2>
                 {% endif %}
             </div>
             <div class="col-md-2">
