@@ -12,7 +12,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous">
         <!-- style -->
-        <link rel="stylesheet" href="{% static "CSS's/signIn.css" %}">
+        <link rel="stylesheet" href="{% static 'CSS\'s/signIn.css' %}">
         <title class="card-title">Sign In</title>
     </head>
     <body>
@@ -22,7 +22,8 @@
                 <header>
                     <div class="columna">
                         <div class="col">
-                            <img src="" class="img-fluid"
+                            <img src="{% static 'AgroMerc.jpg' %}"
+                                class="img-fluid"
                                 alt="AgroMerc" style="width: 8cm;">
                         </div>
                         <div class="col"
@@ -57,7 +58,8 @@
                             {% csrf_token %}
                             <div class="mb-6">
                                 <div class="form-text">
-                                    <label for="signUp">Nombres de Usuario o Correo</label>
+                                    <label for="signUp">Nombres de Usuario o
+                                        Correo</label>
                                 </div>
                                 <input class="form-control" type="text"
                                     name="nameUser" id="nameUser">
@@ -68,7 +70,7 @@
                                 </div>
                                 <input class="form-control" type="password"
                                     name="password" id="password">
-                            </div>
+                            </div><br>
                             <div class="md-5">
                                 <button type="submit" class="btn btn-primary
                                     mb-3">Ingresar
@@ -77,14 +79,15 @@
                         </div>
                     </form>
                 </div>
-                {% if not existeCuenta or not correctPass %}
+                {% if not existeCuenta %}
                 <div class="md-4">
-                    <h1>{{ Respuesta }}</h1>
+                    <h1></h1>
                 </div>
+                {% elif not correc %}
                 {% endif %}
                 <!-- Form -->
                 {% else %}
-                <h1 class="ingresoExitoso">
+                <h1 class="ingresoExitoso h-100">
                     Ingreso exitoso, redireccionando a la pagina principal
                 </h1>
                 {% endif %}

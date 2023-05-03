@@ -23,12 +23,12 @@ def AgroMerc(request):
 
 #signIn
 def signIn(request):
+    exist=False
+    correctPassword=False
+    ingreso=False
     if request.method == 'POST':
         nameUser=str(request.POST["nameUser"])
         password=str(request.POST["password"])
-        exist=False
-        correctPassword=False
-        ingreso=False
         #verificar si existe el usuario y ver que es correcta la contraseña
         for users in colClients.find():
             #verificar usuario o correo
@@ -46,7 +46,7 @@ def signIn(request):
         if(ingreso):
             #redireccionar a el main
             ingreso=True
-        context={"existeCuenta":exist,"correctPassword":correctPassword,"Ingreso":ingreso, "Respuesta":texto}
+    context={"existeCuenta":exist,"correctPassword":correctPassword,"Ingreso":ingreso}
     return render(request,'signIn.html',context)
 
 #signUp
