@@ -26,27 +26,26 @@ def signIn(request):
     exist=False
     correctPassword=False
     ingreso=False
+    intento=False
     if request.method == 'POST':
+        intento=True
         nameUser=str(request.POST["nameUser"])
         password=str(request.POST["password"])
         #verificar si existe el usuario y ver que es correcta la contraseña
         for users in colClients.find():
             #verificar usuario o correo
-            if(nameUser==users['nameUser'] or nameUser==users['Email']):
+            if(nameUser==users['UserName'] or nameUser==users['Email']):
                 exist=True
-                #verificar contraseña 
+                #verificar contraseña
                 if(password==users['Password']):
+                    print("verificando")
                     correctPassword=True
                     ingreso=True
                     break
-        if(not exist):
-            texto="el Correo o Nombre no existe, verifique o realice el registro"
-        elif(not correctPassword):
-            texto ="la contraseña es incorrecta, intente nuevamente"
         if(ingreso):
             #redireccionar a el main
             ingreso=True
-    context={"existeCuenta":exist,"correctPassword":correctPassword,"Ingreso":ingreso}
+    context={"existCount":exist,"correctPassword":correctPassword,"Ingreso":ingreso, "intento":intento}
     return render(request,'signIn.html',context)
 
 #signUp
