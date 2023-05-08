@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-2" style="margin: auto;">
                             <button type="button" class="btn btn-light">
-                                <a href="#">
+                                <a href="{% url 'signIn' %}">
                                     Sign In
                                 </a>
                             </button>
@@ -146,7 +146,7 @@
                     </h1>
                 </div>
                 <div class="md-10">
-                    <button href="signIn" class="btn btn-light">
+                    <button href="{% url 'signIn' %}" class="btn btn-light">
                         Iniciar Sesión
                     </button>
                 </div>
@@ -162,7 +162,8 @@
             <footer class="blockquote-footer">
                 <div class="columna">
                     <div class="col">
-                        <img src="" class="img-fluid" alt="">
+                        <img src="{% static 'AgroMerc.jpg' %}" class="img-fluid"
+                            alt="">
                     </div>
                     <div class="col" style="color: white; font-size: x-large;
                         margin: auto;">
@@ -173,7 +174,8 @@
                     <div class="col-3">
                         <button type="button" class="btn btn-success">
                             <a
-                                href="#" class="link-success" style="color:
+                                href="{% url 'AgroMerc' %}" class="link-success"
+                                style="color:
                                 black;">
                                 About Us
                             </a>
