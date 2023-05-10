@@ -8,14 +8,17 @@ from django.template import loader
 
 
 #conexion al cliente de MongoDb server
-client = MongoClient(
-    "mongodb+srv://AgroMerc:AgroMerc2023@cluster0.5elomeg.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://AgroMerc:AgroMerc2023@cluster0.5elomeg.mongodb.net/?retryWrites=true&w=majority")
 #Base de datos
 db = client['AgroMerc']
 #Colecciones
 colClients = db['Clientes']
 colProducts = db['Productos']
 print(client.list_database_names())
+
+#user
+userOnline = ""
+
 
 #AgroMerc
 def AgroMerc(request):
@@ -41,9 +44,10 @@ def signIn(request):
                     print("verificando")
                     correctPassword=True
                     ingreso=True
+                    userOnline=users
                     break
+        #ingreso exitoso
         if(ingreso):
-            #redireccionar a el main
             ingreso=True
     context={"existCount":exist,"correctPassword":correctPassword,"Ingreso":ingreso, "intento":intento}
     return render(request,'signIn.html',context)
@@ -96,6 +100,7 @@ def signUp(request):
     return render(request, 'signUp.html', context)
 
 def main(request):
-    
-    context={}
+    user=userOnline
+    print(user['UserName'])
+    context={"nameUser":str(user['UserName'])}
     return render(request, 'main.html',context)

@@ -110,6 +110,8 @@
                 {% else %}
                 <h2 class="h2 alert-info">
                     Ingreso exitoso, redireccionando a la pagina principal
+                    <meta http-equiv="refresh"
+                        content="0; url={% url 'main' %}">
                 </h2>
                 {% endif %}
             </div>
