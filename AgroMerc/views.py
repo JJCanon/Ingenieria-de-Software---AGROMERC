@@ -100,9 +100,16 @@ def signUp(request):
     return render(request, 'signUp.html', context)
 
 def main(request):
-    print(userOnline)
-    print("hola")
-    context={"nameUser":"Hola"}
+    global userOnline
+    user=userOnline
+    context={"Name":user['Name'],"Surnames":user['Surnames'],
+             "Cedula":user['Cedula'],"PhoneNumber":user['PhoneNumber'],
+             "Email":user['Email'],"UserName":user['UserName'],
+             "Password":user['Password'],"TypeUser":user['TypeUser']}
+    listaProductos=[]
+    for producto in colProducts.find():
+        listaProductos.append(producto)
+    
     return render(request, 'main.html',context)
 
 
