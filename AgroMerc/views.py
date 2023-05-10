@@ -17,7 +17,7 @@ colProducts = db['Productos']
 print(client.list_database_names())
 
 #user
-userOnline = ""
+userOnline = {}
 
 
 #AgroMerc
@@ -41,10 +41,10 @@ def signIn(request):
                 exist=True
                 #verificar contraseña
                 if(password==users['Password']):
-                    print("verificando")
+                    #print("verificando")
                     correctPassword=True
                     ingreso=True
-                    userOnline=users
+                    userActive(users)
                     break
         #ingreso exitoso
         if(ingreso):
@@ -83,7 +83,7 @@ def signUp(request):
                 registered=True
                 #guardar datos en Base de Datos 
                 datos = {"Name":name,"Surnames":surnames,"Cedula":cedula,
-                         "PhoneNumbe":phoneNumber,"Email":email,
+                         "PhoneNumber":phoneNumber,"Email":email,
                          "UserName":userName,"Password":password,
                          "TypeUser":userType}
                 colClients.insert_one(datos)
@@ -100,7 +100,12 @@ def signUp(request):
     return render(request, 'signUp.html', context)
 
 def main(request):
-    user=userOnline
-    print(user['UserName'])
-    context={"nameUser":str(user['UserName'])}
+    print(userOnline)
+    print("hola")
+    context={"nameUser":"Hola"}
     return render(request, 'main.html',context)
+
+
+def userActive(user):
+    global userOnline
+    userOnline = user
