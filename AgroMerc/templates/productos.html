@@ -31,19 +31,7 @@
                             <h1 class="h1">AgroMerc</h1>
                         </div>
                         <div class="col-2" style="margin: auto;">
-                            <button type="button" class="btn btn-dark"
-                                style="position: static;">
-                                <a class="link-opacity-100"
-                                    href="{% url 'signUp' %}">
-                                    sign Up
-                                </a>
-                            </button>
-                            <button type="button" class="btn btn-light"
-                                style="position: static;">
-                                <a href="{% url 'signIn' %}">
-                                    Sign In
-                                </a>
-                            </button>
+
                         </div>
                     </div>
                 </header>
@@ -57,9 +45,103 @@
             </div>
             <div class="col-md-7" style="align-content: center;">
                 <div class="row">
-                    <div class="h-100">
-                        <h1>¡¡¡¡Somos AgroMerc!!!!</h1>
+                    {% if not ProdcutoAgregado %}
+                    <div class="h-100"> producto ingresado, Redirigiendo al feed</div>
+                    <!--<meta http-equiv="refresh"
+                        content="0; url={% url 'main' %}">-->
+                    {% else %}
+                    <div class="form-control">
+                        <form method="post">
+                            <div class="col-md-12">
+                                {% csrf_token %}
+                                <div class="mb-6">
+                                    <div class="form-text">
+                                        <label for="producto">
+                                            Producto
+                                        </label>
+                                    </div>
+                                    <div class="form-select">
+                                        <select name="ProductName"
+                                            id="ProductName"
+                                            class="form-select"
+                                            aria-label="Default select
+                                            example">
+                                            <option selected
+                                                value="Aguacate">Aguacate</option>
+                                            <option value="Banano">Banano</option>
+                                            <option value="Brócoli">Brócoli</option>
+                                            <option value="Café">Café</option>
+                                            <option
+                                                value="Cebolla_Cabezona">Cebolla
+                                                Cabezona</option>
+                                            <option value="Cebolla_Larga">Cebolla
+                                                Larga</option>
+                                            <option value="Coliflor">Coliflor</option>
+                                            <option value="Frijol">Frijol</option>
+                                            <option value="Guayaba">Guayaba</option>
+                                            <option value="Lechuga">Lechuga</option>
+                                            <option value="Limón">Limón</option>
+                                            <option value="Lulo">Lulo</option>
+                                            <option value="Maíz">Maíz</option>
+                                            <option value="Mango">Mango</option>
+                                            <option value="Maracuyá">Maracuyá</option>
+                                            <option value="Naranja">Naranja</option>
+                                            <option value="Papa">Papa</option>
+                                            <option value="Papaya">Papaya</option>
+                                            <option value="Plátano">Platano</option>
+                                            <option value="Sandía">Sandía</option>
+                                            <option value="Tomate">Tomate</option>
+                                            <option value="Yuca">Yuca</option>
+                                            <option value="Zanahoria">Zanahoria</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <div class="form-control">
+                                        <label for="producto">
+                                            Nombre del Producto
+                                        </label>
+                                    </div>
+                                    <input type="text" name="specificName"
+                                        id="specificName"
+                                        placeholder="ingrese el nombre/tipo
+                                        especifico del producto"><br>
+                                    <p class="p-1" style="color: blue;">
+                                        Ej: si es Limón Tahití,
+                                        escriba Tahití;
+                                        si es Naranja Valencia,
+                                        escriba Valencia, a así con los
+                                        demas
+                                    </p>
+                                </div>
+                                <div class="mb-6">
+                                    <div class="form-control">
+                                        <label for="producto">
+                                            Cantidad Maxima a Disponer
+                                        </label>
+                                    </div>
+                                    <input type="text" name="candidadMax"
+                                        id="cantidadMax">
+                                </div>
+                                <div class="mb-6">
+                                    <div class="form-control">
+                                        <label for="producto">
+                                            Cantidad Mínima a Vender
+                                        </label>
+                                    </div>
+                                    <input type="text" name="cantidadMin"
+                                        id="cantidadMin">
+                                </div>
+                                <div class="md-5">
+                                    <button type="submit" class="btn
+                                        btn-primary mb-3">
+                                        Agregar Producto
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-2">

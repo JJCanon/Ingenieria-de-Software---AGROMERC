@@ -99,20 +99,40 @@ def signUp(request):
                  "registered":registered}
     return render(request, 'signUp.html', context)
 
+#main : pagina pricipal
 def main(request):
     global userOnline
     user=userOnline
+    listaProductos=[]
+    # buscar lista de productos
+    for producto in colProducts.find():
+        #agregar producto a la lista para mostrar
+        listaProductos.append(producto)
     context={"Name":user['Name'],"Surnames":user['Surnames'],
              "Cedula":user['Cedula'],"PhoneNumber":user['PhoneNumber'],
              "Email":user['Email'],"UserName":user['UserName'],
-             "Password":user['Password'],"TypeUser":user['TypeUser']}
-    listaProductos=[]
-    for producto in colProducts.find():
-        listaProductos.append(producto)
-    
+             "Password":user['Password'],"TypeUser":user['TypeUser'],"Productos":listaProductos}
     return render(request, 'main.html',context)
 
+#producto
+def producto(request):
+    global userOnline
+    user=userOnline
+    productoAgregado=False
+    if request.method == 'POST':
+        producto=str(request.POST["ProductName"])
+        nameProduct=str(request.POST["specificName"])
+        maxQuantity=str(request.POST['cantidadMax'])
+        minQuantity=str(request.POST['cantidadMin'])
+        #Json para agregar a la base de datos
+        datos={"Nombre":producto,"specificName":nameProduct,"maxQuantity":maxQuantity,"minQuantity":minQuantity,"seller":user['Cedula']}
+        #agregar a la base de datos
+        colProducts.insert_one(datos)
+        productoAgregado=True
+    context={"ProductoAgregado":productoAgregado}
+    return render(request,'producto.html', context)
 
+#userActive asignará al usuario que está haciendo uso de la plataforma
 def userActive(user):
     global userOnline
     userOnline = user
