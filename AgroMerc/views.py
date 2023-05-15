@@ -104,6 +104,9 @@ def main(request):
     global userOnline
     user=userOnline
     listaProductos=[]
+    seller=False
+    if(user["TypeUser"]=="Seller"):
+        seller=True
     # buscar lista de productos
     for producto in colProducts.find():
         #agregar producto a la lista para mostrar
@@ -111,7 +114,7 @@ def main(request):
     context={"Name":user['Name'],"Surnames":user['Surnames'],
              "Cedula":user['Cedula'],"PhoneNumber":user['PhoneNumber'],
              "Email":user['Email'],"UserName":user['UserName'],
-             "Password":user['Password'],"TypeUser":user['TypeUser'],"Productos":listaProductos}
+             "Password":user['Password'],"TypeUser":user['TypeUser'],"Productos":listaProductos, "Seller":seller}
     return render(request, 'main.html',context)
 
 #producto
@@ -120,12 +123,14 @@ def producto(request):
     user=userOnline
     productoAgregado=False
     if request.method == 'POST':
-        producto=str(request.POST["ProductName"])
+        producto=str(request.POST.get("ProductName"))
         nameProduct=str(request.POST["specificName"])
         maxQuantity=str(request.POST['cantidadMax'])
         minQuantity=str(request.POST['cantidadMin'])
+        #unit = unidad de medida
+        unit=str(request.POST.get('unit')) 
         #Json para agregar a la base de datos
-        datos={"Nombre":producto,"specificName":nameProduct,"maxQuantity":maxQuantity,"minQuantity":minQuantity,"seller":user['Cedula']}
+        datos={"Nombre":producto,"specificName":nameProduct,"maxQuantity":maxQuantity,"minQuantity":minQuantity,"unit":unit,"seller":user['Cedula']}
         #agregar a la base de datos
         colProducts.insert_one(datos)
         productoAgregado=True
