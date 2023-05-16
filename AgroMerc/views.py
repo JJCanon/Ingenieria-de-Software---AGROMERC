@@ -130,7 +130,9 @@ def producto(request):
         #unit = unidad de medida
         unit=str(request.POST.get('unit')) 
         #Json para agregar a la base de datos
-        datos={"Nombre":producto,"specificName":nameProduct,"maxQuantity":maxQuantity,"minQuantity":minQuantity,"unit":unit,"seller":user['Cedula']}
+        datos={"Name":producto,"specificName":nameProduct,
+                "maxQuantity":maxQuantity,"minQuantity":minQuantity,
+                "unit":unit,"seller":user['Name']+' '+user['Surnames'],"id":user['Cedula']}
         #agregar a la base de datos
         colProducts.insert_one(datos)
         productoAgregado=True
