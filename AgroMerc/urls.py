@@ -27,6 +27,7 @@ urlpatterns = [
     path('signIn/', signIn, name="signIn"),
     path('main/', main, name="main"),
     path('main/producto/', producto, name='producto'),
+    path('main/misProductos/', misProductos, name='misProductos')
 ]
 
 #configuración Url para imagenes

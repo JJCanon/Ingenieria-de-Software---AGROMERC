@@ -16,6 +16,82 @@
         <title>MisProductos</title>
     </head>
     <body>
+        <!-- Header-->
+        <div class="row" style="background-color: black;">
+            <div class="card-header">
+                <header>
+                    <div class="columna">
+                        <div class="col">
+                            <img src="{% static 'AgroMerc.jpg' %}"
+                                class="img-fluid"
+                                alt="AgroMerc" style="width: 8cm;">
+                        </div>
+                        <div class="col"
+                            style="color: white; font-size:x-large; margin:
+                            auto;">
+                            <h1 class="h1">AgroMerc</h1>
+                        </div>
+                        <div class="col-2" style="margin: auto;">
 
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <!-- Header -->
+        <!--Contenido-->
+        <div class="contenido">
+            <div class="col-md-2">
+                <h1>contenido</h1>
+            </div>
+            <div class="col-md-7" style="align-content: center;">
+                <div class="h-100">
+                    <h1>
+                        Mis Productos
+                    </h1>
+                </div>
+                <div class="list-group">
+                    {% for productos in MisProductos %}
+                    <div class="md-6">
+                        <li>
+                            {{ productos }}
+                        </li>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h1>contenido</h1>
+            </div>
+        </div>
+        <!--contenido-->
+        <!--footer-->
+        <div class="row" style="background-color: black;">
+            <footer class="blockquote-footer">
+                <div class="columna">
+                    <div class="col">
+                        <img src="{% static 'AgroMerc.jpg' %}" class="img-fluid"
+                            alt>
+                    </div>
+                    <div class="col" style="color: white; font-size: x-large;
+                        margin: auto;">
+                        <h1 class="h1">
+                            AgroMerc
+                        </h1>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-success">
+                            <a
+                                href="{% url 'AgroMerc' %}" class="link-success"
+                                style="color:
+                                black;">
+                                About Us
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!--footer-->
     </body>
 </html>

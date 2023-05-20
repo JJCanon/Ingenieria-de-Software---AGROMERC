@@ -150,9 +150,20 @@ def producto(request):
     context = {"ProductoAgregado": productoAgregado}
     return render(request, 'producto.html', context)
 
+#MisProductos
+def misProductos(request):
+    global  userOnline
+    user = userOnline
+    misProductos=[]
+    for producto in colProducts.find():
+        if producto['Cedula'] == user['Cedula']:
+            misProductos.append(producto)
+    context={"misProductos":misProductos}
+    return render(request,'misProductos.html',context)
+        
+
+
 # userActive asignará al usuario que está haciendo uso de la plataforma
-
-
 def userActive(user):
     global userOnline
     userOnline = user
