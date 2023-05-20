@@ -11,7 +11,7 @@
             integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
             crossorigin="anonymous">
         <!-- Styles -->
-        <link rel="stylesheet" href="{% static 'CSS\'s/productos.css' %}">
+        <link rel="stylesheet" href="{% static 'CSS\'s/style.css' %}">
         <title>Agregar Productos</title>
     </head>
     <body>
@@ -47,8 +47,8 @@
                 <div class="row">
                     {% if not ProdcutoAgregado %}
                     <div class="h-100"> producto ingresado, Redirigiendo al feed</div>
-                    <!--<meta http-equiv="refresh"
-                        content="0; url={% url 'main' %}">-->
+                    <meta http-equiv="refresh"
+                        content="0; url={% url 'main' %}">
                     {% else %}
                     <div class="form-control">
                         <form method="post">
