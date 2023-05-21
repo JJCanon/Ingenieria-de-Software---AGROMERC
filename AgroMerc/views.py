@@ -107,33 +107,44 @@ def signUp(request):
     return render(request, 'signUp.html', context)
 
 # main : pagina pricipal
-
-
 def main(request):
     global userOnline
     user = userOnline
-    listaProductos = []
+    nombreListaProductos = []
+    specificListaProductos= []
+    maxListaProducto = []
+    minListaProductos = []
+    unidadListaProducto = []
     seller = False
+    #verificar si es vendedor
     if (user["TypeUser"] == "Seller"):
         seller = True
     # buscar lista de productos
     for producto in colProducts.find():
         # agregar producto a la lista para mostrar
-        listaProductos.append(producto)
+        nombreListaProductos.append(producto)
     context = {"Name": user['Name'], "Surnames": user['Surnames'],
                "Cedula": user['Cedula'], "PhoneNumber": user['PhoneNumber'],
                "Email": user['Email'], "UserName": user['UserName'],
-               "Password": user['Password'], "TypeUser": user['TypeUser'], "Productos": listaProductos, "Seller": seller}
+               "Password": user['Password'], "Seller": seller,
+               "nombreProductos": nombreListaProductos}
+    #realice compra
+    if request.method == 'POST':
+       for key, value in request.POST.items():
+           if key.startswith('quantityOrdered_'):
+               product_id = key.split('_')[1]
+               quantityOrdered = value
+               print(product_id, quantityOrdered)
     return render(request, 'main.html', context)
 
 # producto
-
-
 def producto(request):
     global userOnline
     user = userOnline
+    print(user)
     productoAgregado = False
     if request.method == 'POST':
+        productoAgregado = True
         producto = str(request.POST.get("ProductName"))
         nameProduct = str(request.POST["specificName"])
         maxQuantity = str(request.POST['cantidadMax'])
@@ -146,9 +157,11 @@ def producto(request):
                  "unit": unit, "seller": user['Name']+' '+user['Surnames'], "id": user['Cedula']}
         # agregar a la base de datos
         colProducts.insert_one(datos)
-        productoAgregado = True
+        context = {"ProductoAgregado": productoAgregado}
+        return render(request, 'productos.html', context)
     context = {"ProductoAgregado": productoAgregado}
-    return render(request, 'producto.html', context)
+    print(productoAgregado)
+    return render(request, 'productos.html', context)
 
 #MisProductos
 def misProductos(request):

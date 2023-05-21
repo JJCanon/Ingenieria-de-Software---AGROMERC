@@ -38,6 +38,11 @@
                                     Agregar Producto
                                 </a>
                             </button>
+                            <button type="button" class="btn btn-dark">
+                                <a href="{% url 'misProductos' %}">
+                                    Mis Productos
+                                </a>
+                            </button>
                             {% else %}
                             <button type="button" class=" btn btn-dark">
                                 <a href="{% url '#' %}">
@@ -52,7 +57,6 @@
                                     Cerrar Sesión
                                 </a>
                             </button>
-                            <p class="p-1"> {{nameUser}} </p>
                         </div>
                     </div>
                 </header>
@@ -64,22 +68,48 @@
             <div class="col-md-2">
                 <h1>contenido</h1>
             </div>
-            <div class="col-md-7" style="align-content: center;">
+            <div class="col" style="align-content: center;">
                 <div class="row">
                     <div class="h-100" style="text-align: center;">
                         <h1>Welcome {{Name}} </h1>
                     </div>
-                    <div class="page-item">
-                        {% for producto in Productos %}
-                        <h1>{{ producto['Name'] }}</h1>
-                        <h1>{{ produto['specificName'] }}</h1>
-                        <h1>{{ producto['minQuantity'] }}</h1>
-                        <h1>{{ producto['maxQuantity'] }}</h1>
-                        <h1>{{ producto['unit'] }}</h1>
-                        <h1>{{ producto['seller'] }}</h1>
-                        <button type="submit" class="btn btn-success">
-                            Comprar
-                        </button>
+                    <div class="btn-group-vertical">
+                        <form method="post" action="{% url 'main' %}">
+                            {% csrf_token %}
+                            {% for producto in nombreProductos %}
+                            <label>
+                                <ul class="list-group-item-info">
+                                    <li>
+                                        Nombre:
+                                        {{ producto.Name }}
+                                        {{ producto.specificName }}
+                                    </li>
+                                    <li>
+                                        Cantidad Máxima:
+                                        {{ producto.maxQuantity }}
+                                    </li>
+                                    <li>
+                                        Cantidad Mínima:
+                                        {{ producto.minQuantity }}
+                                    </li>
+                                    <li>
+                                        Unidad de Medida:
+                                        {{ producto.unit }}
+                                    </li>
+                                    <li>
+                                        <input type="text"
+                                            name="quantityOrdered_{{ producto.id }}_{{producto.name}}_{{producto.specificName}}_{{producto.id2}}"
+                                            class="input-group-text"
+                                            id="quantityOrdered_{{ producto.id }}"
+                                            placeholder="Ingrese la cantidad que desea Comprar">
+                                    </li>
+                                </ul>
+                                <button type="submit"
+                                    class="btn btn-success">
+                                    Comprar
+                                </button>
+                            </label>
+                        </form>
                         {% endfor %}
                     </div>
                 </div>
@@ -94,9 +124,10 @@
             <footer class="blockquote-footer">
                 <div class="columna">
                     <div class="col">
-                        <img src="" class="img-fluid" alt="">
+                        <img src class="img-fluid" alt>
                     </div>
-                    <div class="col" style="color: white; font-size: x-large;
+                    <div class="col"
+                        style="color: white; font-size: x-large;
                         margin: auto;">
                         <h1 class="h1">
                             AgroMerc
@@ -105,7 +136,8 @@
                     <div class="col-3">
                         <button type="button" class="btn btn-success">
                             <a
-                                href="{% url 'AgroMerc' %}" class="link-success"
+                                href="{% url 'AgroMerc' %}"
+                                class="link-success"
                                 style="color:
                                 black;">
                                 About Us
@@ -118,3 +150,10 @@
         <!--footer-->
     </body>
 </html>
+{% comment %}
+<!-- <h1>{{ produto['specificName'] }}</h1>
+                        <h1>{{ producto['minQuantity'] }}</h1>
+                        <h1>{{ producto['maxQuantity'] }}</h1>
+                        <h1>{{ producto['unit'] }}</h1>
+                        <h1>{{ producto['seller'] }}</h1>-->
+{% endcomment %}
