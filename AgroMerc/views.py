@@ -111,10 +111,6 @@ def main(request):
     global userOnline
     user = userOnline
     nombreListaProductos = []
-    specificListaProductos= []
-    maxListaProducto = []
-    minListaProductos = []
-    unidadListaProducto = []
     seller = False
     #verificar si es vendedor
     if (user["TypeUser"] == "Seller"):
@@ -132,9 +128,14 @@ def main(request):
     if request.method == 'POST':
        for key, value in request.POST.items():
            if key.startswith('quantityOrdered_'):
-               product_id = key.split('_')[1]
-               quantityOrdered = value
-               print(product_id, quantityOrdered)
+               valores = key.split('_')
+               producto=buscarProducto(valores[1],valores[4])
+               quantityOrdered = int(value)
+               print(producto)
+               datos = {"Name": producto['id'], "specificName": producto['specificName'],
+                 "maxQuantity": str(int(producto['maxQuantity'])-quantityOrdered), "minQuantity": producto['minQuantity'],
+                 "unit": producto['unit'], "seller":producto['seller'], "id": producto['id']}
+               print(datos)
     return render(request, 'main.html', context)
 
 # producto
@@ -151,10 +152,11 @@ def producto(request):
         minQuantity = str(request.POST['cantidadMin'])
         # unit = unidad de medida
         unit = str(request.POST.get('unit'))
+        id2=id2(user['id'])
         # Json para agregar a la base de datos
         datos = {"Name": producto, "specificName": nameProduct,
                  "maxQuantity": maxQuantity, "minQuantity": minQuantity,
-                 "unit": unit, "seller": user['Name']+' '+user['Surnames'], "id": user['Cedula']}
+                 "unit": unit, "seller": user['Name']+' '+user['Surnames'], "id": user['Cedula'],"id2":id2}
         # agregar a la base de datos
         colProducts.insert_one(datos)
         context = {"ProductoAgregado": productoAgregado}
@@ -180,3 +182,19 @@ def misProductos(request):
 def userActive(user):
     global userOnline
     userOnline = user
+
+#busca producto que está comprando
+def buscarProducto(id,id2):
+    print(id,id2)
+    producto=colProducts.find({"id":id,"id2":id2})
+    return(producto[0])
+
+def id2(id):
+    valorid2 = 0
+    for producto in colProducts.find({"id":id}):
+        valorid2=producto['id2']
+    valorid2=str(int(valorid2)+1)
+    return valorid2
+
+def posibleCompra():
+    valor=0

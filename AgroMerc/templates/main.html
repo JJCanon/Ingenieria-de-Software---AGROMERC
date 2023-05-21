@@ -97,8 +97,12 @@
                                         {{ producto.unit }}
                                     </li>
                                     <li>
+                                        Vendedor:
+                                        {{ producto.seller}}
+                                    </li>
+                                    <li>
                                         <input type="text"
-                                            name="quantityOrdered_{{ producto.id }}_{{producto.name}}_{{producto.specificName}}_{{producto.id2}}"
+                                            name="quantityOrdered_{{ producto.id }}_{{producto.Name}}_{{producto.specificName}}_{{producto.id2}}"
                                             class="input-group-text"
                                             id="quantityOrdered_{{ producto.id }}"
                                             placeholder="Ingrese la cantidad que desea Comprar">
