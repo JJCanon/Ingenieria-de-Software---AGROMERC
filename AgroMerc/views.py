@@ -167,14 +167,20 @@ def misProductos(request):
         
 #Compra
 def compra(request):
-    context={}
+    compraRealizada=False
+    global userOnline
+    user=userOnline
     if request.method=='POST':
         for key, value in request.POST.items():
            if key.startswith('quantityOrdered_'):
                valores = key.split('_')
                producto=buscarProducto(valores[1],valores[4])
                quantityOrdered = int(value)
+               print(producto)
+               context={"buyed":compraRealizada,"producto":producto,"cantidad":quantityOrdered,"user":user}
                #posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered))
+               return render(request,'compra.html',context)
+    context={"buyed":compraRealizada}
     return render(request,'compra.html',context)
 
 

@@ -34,20 +34,15 @@
                         <div class="col-2" style="margin: auto;">
                             {% if Seller %}
                             <button type="button" class=" btn btn-dark">
-                                <a href="{% url 'producto' %}">
-                                    Agregar Producto
-                                </a>
-                            </button>
-                            <button type="button" class="btn btn-dark">
-                                <a href="{% url 'misProductos' %}">
-                                    Mis Productos
+                                <a href="{% url 'main' %}">
+                                    Cancelar
                                 </a>
                             </button>
                             {% endif %}
                             <button type="button" class="btn btn-dark"
                                 style="position: static;">
                                 <a class="link-opacity-100"
-                                    href="{% url 'main' %}">
+                                    href="{% url 'signIn' %}">
                                     Cerrar Sesión
                                 </a>
                             </button>
@@ -63,7 +58,51 @@
                 <h1>contenido</h1>
             </div>
             <div class="col" style="align-content: center;">
-
+                <div class="row">
+                    <h1 class="h-100">
+                        Ticket
+                    </h1>
+                </div>
+                <div class="md-6">
+                    <p class="p-4 text-bg-info">
+                        a continuacion le proporcionaremos un link para ir
+                        directamente al whatsapp del vendedor
+                        o si desea solamente el numero de contacto para realizar
+                        la compra del producto que seleccionó
+                    </p>
+                </div>
+                <div class="list-group-item">
+                    <section class="text-bg-dark">
+                        <ul>
+                            Nombre del Producto:
+                            {{ producto.Name }}
+                            {{ producto.specificName }}
+                        </ul>
+                        <ul>
+                            cantidad: {{ cantidad }} {{ producto.unit }}
+                        </ul>
+                        <ul>
+                            Vendedor: {{ producto.seller }}
+                        </ul>
+                        <ul>
+                            Comprador {{ user.Name }}
+                        </ul>
+                    </section>
+                </div>
+                <div class="link-success">
+                    <button type="button" class="btn btn-success">
+                        <a href="https://wa.me/57{{user.PhoneNumber}}"
+                            style="color:black">
+                            WhatsApp
+                        </a>
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        <a href="tel:+57{{user.PhoneNumber}}"
+                            style="color: black;">
+                            Llamar
+                        </a>
+                    </button>
+                </div>
             </div>
             <div class="col-md-2">
                 <h1>contenido</h1>
