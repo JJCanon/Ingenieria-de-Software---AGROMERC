@@ -43,12 +43,6 @@
                                     Mis Productos
                                 </a>
                             </button>
-                            {% else %}
-                            <button type="button" class=" btn btn-dark">
-                                <a href="{% url '#' %}">
-                                    Comprar
-                                </a>
-                            </button>
                             {% endif %}
                             <button type="button" class="btn btn-dark"
                                 style="position: static;">
@@ -74,7 +68,7 @@
                         <h1>Welcome {{Name}} </h1>
                     </div>
                     <div class="btn-group-vertical">
-                        <form method="post" action="{% url 'main' %}">
+                        <form method="post" action="{% url 'compra' %}">
                             {% csrf_token %}
                             {% for producto in nombreProductos %}
                             <label>
@@ -154,10 +148,3 @@
         <!--footer-->
     </body>
 </html>
-{% comment %}
-<!-- <h1>{{ produto['specificName'] }}</h1>
-                        <h1>{{ producto['minQuantity'] }}</h1>
-                        <h1>{{ producto['maxQuantity'] }}</h1>
-                        <h1>{{ producto['unit'] }}</h1>
-                        <h1>{{ producto['seller'] }}</h1>-->
-{% endcomment %}

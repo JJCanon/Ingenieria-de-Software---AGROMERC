@@ -124,18 +124,7 @@ def main(request):
                "Email": user['Email'], "UserName": user['UserName'],
                "Password": user['Password'], "Seller": seller,
                "nombreProductos": nombreListaProductos}
-    #realice compra
-    if request.method == 'POST':
-       for key, value in request.POST.items():
-           if key.startswith('quantityOrdered_'):
-               valores = key.split('_')
-               producto=buscarProducto(valores[1],valores[4])
-               quantityOrdered = int(value)
-               print(producto)
-               datos = {"Name": producto['id'], "specificName": producto['specificName'],
-                 "maxQuantity": str(int(producto['maxQuantity'])-quantityOrdered), "minQuantity": producto['minQuantity'],
-                 "unit": producto['unit'], "seller":producto['seller'], "id": producto['id']}
-               print(datos)
+               
     return render(request, 'main.html', context)
 
 # producto
@@ -176,6 +165,18 @@ def misProductos(request):
     context={"misProductos":misProductos}
     return render(request,'misProductos.html',context)
         
+#Compra
+def compra(request):
+    context={}
+    if request.method=='POST':
+        for key, value in request.POST.items():
+           if key.startswith('quantityOrdered_'):
+               valores = key.split('_')
+               producto=buscarProducto(valores[1],valores[4])
+               quantityOrdered = int(value)
+               #posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered))
+    return render(request,'compra.html',context)
+
 
 
 # userActive asignará al usuario que está haciendo uso de la plataforma
@@ -196,5 +197,9 @@ def id2(id):
     valorid2=str(int(valorid2)+1)
     return valorid2
 
-def posibleCompra():
+def posibleCompra(id2,newValue):
     valor=0
+    global userOnline
+    user=userOnline
+    result=colProducts.update_one({"id":user['Cedula'],"id2":id2},{'$set':{'maxQuantity':newValue}})
+    print(result)
