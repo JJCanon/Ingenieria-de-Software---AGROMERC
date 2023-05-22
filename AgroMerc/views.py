@@ -15,7 +15,7 @@ db = client['AgroMerc']
 # Colecciones
 colClients = db['Clientes']
 colProducts = db['Productos']
-print(client.list_database_names())
+colCompras = db['Compras']
 
 # user
 userOnline = {}
@@ -29,6 +29,7 @@ def AgroMerc(request):
 
 
 def signIn(request):
+    print(client.list_database_names())
     exist = False
     correctPassword = False
     ingreso = False
@@ -175,11 +176,15 @@ def compra(request):
            if key.startswith('quantityOrdered_'):
                valores = key.split('_')
                producto=buscarProducto(valores[1],valores[4])
-               quantityOrdered = int(value)
-               print(producto)
-               context={"buyed":compraRealizada,"producto":producto,"cantidad":quantityOrdered,"user":user}
-               #posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered))
-               return render(request,'compra.html',context)
+               seller=searchSeller(str(valores[1]))
+               try:
+                   quantityOrdered = int(value)
+                   #print(producto)
+                   context={"buyed":compraRealizada,"producto":producto,"cantidad":quantityOrdered,"user":user,"seller":seller}
+                   #posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered))
+                   return render(request,'compra.html',context)
+               except ValueError:
+                   return redirect('main')
     context={"buyed":compraRealizada}
     return render(request,'compra.html',context)
 
@@ -192,7 +197,6 @@ def userActive(user):
 
 #busca producto que está comprando
 def buscarProducto(id,id2):
-    print(id,id2)
     producto=colProducts.find({"id":id,"id2":id2})
     return(producto[0])
 
@@ -203,9 +207,15 @@ def id2(id):
     valorid2=str(int(valorid2)+1)
     return valorid2
 
+#si el usuario confirma la compra
 def posibleCompra(id2,newValue):
-    valor=0
     global userOnline
     user=userOnline
     result=colProducts.update_one({"id":user['Cedula'],"id2":id2},{'$set':{'maxQuantity':newValue}})
-    print(result)
+    
+#busca el vendedor del producto
+def searchSeller(id):
+    print("hola")
+    busqueda = colClients.find({"Cedula":id})
+    for seller in busqueda:
+        return seller

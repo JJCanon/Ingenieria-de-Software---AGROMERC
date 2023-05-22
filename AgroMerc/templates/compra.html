@@ -91,15 +91,16 @@
                 </div>
                 <div class="link-success">
                     <button type="button" class="btn btn-success">
-                        <a href="https://wa.me/57{{user.PhoneNumber}}"
+                        <a
+                            href="https://wa.me/57{{seller.PhoneNumber}}?text=Hola,%20deseo%20comprar%20{{cantidad}}%20{{producto.unit}}"
                             style="color:black">
                             WhatsApp
                         </a>
                     </button>
                     <button type="button" class="btn btn-success">
-                        <a href="tel:+57{{user.PhoneNumber}}"
+                        <a href="tel:+57{{seller.PhoneNumber}}"
                             style="color: black;">
-                            Llamar
+                            Llamar : {{seller.PhoneNumber}}
                         </a>
                     </button>
                 </div>
