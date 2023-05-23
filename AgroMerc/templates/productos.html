@@ -156,10 +156,13 @@
                             </div>
                         </form>
                     </div>
-                    {% else %}
+                    {% endif %}
+                    {% if ProdcutoAgregado %}
+                    <h1>
+                        producto</h1>
                     <div class="h-100"> producto ingresado, Redirigiendo al feed</div>
                     <meta http-equiv="refresh"
-                        content="1; url={% url 'main' %}">
+                        content="0; url={% url 'main' %}">
                     {% endif %}
                 </div>
             </div>

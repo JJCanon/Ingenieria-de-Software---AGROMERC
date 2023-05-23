@@ -138,17 +138,18 @@ def producto(request):
         minQuantity = str(request.POST['cantidadMin'])
         # unit = unidad de medida
         unit = str(request.POST.get('unit'))
-        id2=id2(user['id'])
+        id2v=id2(user['Cedula'])
         # Json para agregar a la base de datos
         datos = {"Name": producto, "specificName": nameProduct,
                  "maxQuantity": maxQuantity, "minQuantity": minQuantity,
-                 "unit": unit, "seller": user['Name']+' '+user['Surnames'], "id": user['Cedula'],"id2":id2}
+                 "unit": unit, "seller": user['Name']+' '+user['Surnames'], "id": user['Cedula'],"id2":id2v}
         # agregar a la base de datos
         colProducts.insert_one(datos)
-        context = {"ProductoAgregado": productoAgregado}
+        if productoAgregado:
+            return redirect('main')
+        context = {"ProductoAgregado": True}
         return render(request, 'productos.html', context)
     context = {"ProductoAgregado": productoAgregado}
-    print(productoAgregado)
     return render(request, 'productos.html', context)
 
 #MisProductos
@@ -157,7 +158,7 @@ def misProductos(request):
     user = userOnline
     misProductos=[]
     for producto in colProducts.find():
-        if producto['Cedula'] == user['Cedula']:
+        if producto['id'] == user['Cedula']:
             misProductos.append(producto)
     context={"misProductos":misProductos}
     return render(request,'misProductos.html',context)
@@ -198,7 +199,7 @@ def realizarCompra(request):
                 quantityOrdered=int(valores[1])
                 producto=buscarProducto(valores[3],valores[2])
                 seller=searchSeller(valores[3])
-                print(seller['Name']+" "+seller['Surnames'],producto['id'],producto['id2'],user['Name']+" "+user['Surnames'],quantityOrdered)
+                #print(seller['Name']+" "+seller['Surnames'],producto['id'],producto['id2'],user['Name']+" "+user['Surnames'],quantityOrdered)
                 datos={"Seller":seller['Name'],"CedulaSeller":producto['id'],"ProductName":producto['Name']+" "+producto['specificName'],"id2Product":producto['id2'],"Buyer":user['Name']+" "+user['Surnames'],"quantitySold":quantityOrdered}
                 posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered),seller['Cedula'])
                 addCompra(datos)
@@ -227,6 +228,7 @@ def id2(id):
     for producto in colProducts.find({"id":id}):
         valorid2=producto['id2']
     valorid2=str(int(valorid2)+1)
+    print(valorid2,"Hola")
     return valorid2
 
 #si el usuario confirma la compra
