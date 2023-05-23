@@ -201,9 +201,9 @@ def realizarCompra(request):
                 print(seller['Name']+" "+seller['Surnames'],producto['id'],producto['id2'],user['Name']+" "+user['Surnames'],quantityOrdered)
                 datos={"Seller":seller['Name'],"CedulaSeller":producto['id'],"ProductName":producto['Name']+" "+producto['specificName'],"id2Product":producto['id2'],"Buyer":user['Name']+" "+user['Surnames'],"quantitySold":quantityOrdered}
                 posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered),seller['Cedula'])
+                addCompra(datos)
             else:
                 purchaseCancel=True
-    
     context={"purchaseMade":purchaseMade,"purchaseCancel":purchaseCancel}
     return render(request,'comprarealizada.html',context)
 
@@ -238,3 +238,6 @@ def searchSeller(id):
     busqueda = colClients.find({"Cedula":id})
     for seller in busqueda:
         return seller
+    
+def addCompra(datos):
+    colCompras.insert_one(datos)
