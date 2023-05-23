@@ -26,8 +26,6 @@ def AgroMerc(request):
     return render(request, 'AgroMerc.html')
 
 # signIn
-
-
 def signIn(request):
     print(client.list_database_names())
     exist = False
@@ -58,8 +56,6 @@ def signIn(request):
     return render(request, 'signIn.html', context)
 
 # signUp
-
-
 def signUp(request):
     # boolean data
     existCedula = False
@@ -181,14 +177,40 @@ def compra(request):
                    quantityOrdered = int(value)
                    #print(producto)
                    context={"buyed":compraRealizada,"producto":producto,"cantidad":quantityOrdered,"user":user,"seller":seller}
-                   #posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered))
                    return render(request,'compra.html',context)
                except ValueError:
                    return redirect('main')
     context={"buyed":compraRealizada}
     return render(request,'compra.html',context)
 
+#views para mostrar mientras se completa la compra
+def realizarCompra(request):
+    global userOnline
+    user=userOnline
+    purchaseMade=False
+    purchaseCancel=False
+    if request.method=='POST':
+        for key, value in request.POST.items():
+            print(key)
+            if key.startswith('purchaseMade_'):
+                purchaseMade=True
+                valores = key.split('_')
+                quantityOrdered=int(valores[1])
+                producto=buscarProducto(valores[3],valores[2])
+                seller=searchSeller(valores[3])
+                print(seller['Name']+" "+seller['Surnames'],producto['id'],producto['id2'],user['Name']+" "+user['Surnames'],quantityOrdered)
+                datos={"Seller":seller['Name'],"CedulaSeller":producto['id'],"ProductName":producto['Name']+" "+producto['specificName'],"id2Product":producto['id2'],"Buyer":user['Name']+" "+user['Surnames'],"quantitySold":quantityOrdered}
+                posibleCompra(producto['id2'],str(int(producto['maxQuantity'])-quantityOrdered),seller['Cedula'])
+            else:
+                purchaseCancel=True
+    
+    context={"purchaseMade":purchaseMade,"purchaseCancel":purchaseCancel}
+    return render(request,'comprarealizada.html',context)
 
+    """ 
+    Funciones hechas con el fin de que las funciones que implementen vistas hagan uso de estas, para así no saturar las funciones y sea mas rapido el tiempo de respuesta
+
+    """
 
 # userActive asignará al usuario que está haciendo uso de la plataforma
 def userActive(user):
@@ -208,14 +230,11 @@ def id2(id):
     return valorid2
 
 #si el usuario confirma la compra
-def posibleCompra(id2,newValue):
-    global userOnline
-    user=userOnline
-    result=colProducts.update_one({"id":user['Cedula'],"id2":id2},{'$set':{'maxQuantity':newValue}})
+def posibleCompra(id2,newValue,idseller):
+    result=colProducts.update_one({"id":idseller,"id2":id2},{'$set':{'maxQuantity':newValue}})
     
 #busca el vendedor del producto
 def searchSeller(id):
-    print("hola")
     busqueda = colClients.find({"Cedula":id})
     for seller in busqueda:
         return seller

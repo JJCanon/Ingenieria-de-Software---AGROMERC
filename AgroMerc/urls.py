@@ -28,7 +28,8 @@ urlpatterns = [
     path('main/', main, name="main"),
     path('main/producto/', producto, name='producto'),
     path('main/misProductos/', misProductos, name='misProductos'),
-    path('main/Compra',compra,name='compra')
+    path('main/Compra',compra,name='compra'),
+    path('main/Compra/CompraRealizada',realizarCompra,name='realizarCompra')
 ]
 
 #configuración Url para imagenes

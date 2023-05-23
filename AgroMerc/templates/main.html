@@ -71,7 +71,7 @@
                         <form method="post" action="{% url 'compra' %}">
                             {% csrf_token %}
                             {% for producto in nombreProductos %}
-                            <label>
+                            <label class="form-label">
                                 <ul class="list-group-item-info">
                                     <li>
                                         Nombre:

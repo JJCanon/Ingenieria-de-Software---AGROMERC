@@ -32,13 +32,11 @@
                             <h1 class="h1">AgroMerc</h1>
                         </div>
                         <div class="col-2" style="margin: auto;">
-                            {% if Seller %}
                             <button type="button" class=" btn btn-dark">
                                 <a href="{% url 'main' %}">
-                                    Cancelar
+                                    volver al Menú Principal
                                 </a>
                             </button>
-                            {% endif %}
                             <button type="button" class="btn btn-dark"
                                 style="position: static;">
                                 <a class="link-opacity-100"
@@ -58,78 +56,28 @@
                 <h1>contenido</h1>
             </div>
             <div class="col" style="align-content: center;">
-                <div class="row">
-                    <h1 class="h-100">
-                        Ticket
+                <div class="md-7">
+                    <h1 class="h-100 text-bg-primary">
+                        {% if purchaseMade %}
+                        Gracias por utilizar nuestros servicios
+                        {% elif purchaseCancel %}
+                        Lamentamos que no se concretara la compra
+                        {% endif %}
                     </h1>
-                </div>
-                <div class="md-6">
-                    <p class="p-4 text-bg-info">
-                        a continuacion le proporcionaremos un link para ir
-                        directamente al whatsapp del vendedor
-                        o si desea solamente el numero de contacto para realizar
-                        la compra del producto que seleccionó
-                    </p>
-                </div>
-                <div class="list-group-item">
-                    <section class="text-bg-dark">
-                        <ul>
-                            Nombre del Producto:
-                            {{ producto.Name }}
-                            {{ producto.specificName }}
-                        </ul>
-                        <ul>
-                            cantidad: {{ cantidad }} {{ producto.unit }}
-                        </ul>
-                        <ul>
-                            Vendedor: {{ producto.seller }}
-                        </ul>
-                        <ul>
-                            Comprador {{ user.Name }}
-                        </ul>
-                    </section>
-                </div>
-                <div class="link-success">
-                    <button type="button" class="btn btn-success">
-                        <a
-                            href="https://wa.me/57{{seller.PhoneNumber}}?text=Hola,%20deseo%20comprar%20{{cantidad}}%20{{producto.unit}}%20de%20{{producto.Name}}%20{{producto.specificName}}"
-                            style="color:black">
-                            WhatsApp
+                    {% if purchaseMade %}
+                    <button class="btn btn-primary btn-success">
+                        <a href="{% url 'main' %}" style="color:black">
+                            Volver A Comprar
                         </a>
                     </button>
-                    <button type="button" class="btn btn-success">
-                        <a href="tel:+57{{seller.PhoneNumber}}"
-                            style="color: black;">
-                            Llamar : {{seller.PhoneNumber}}
+                    {% elif purchaseCancel %}
+                    <button class="btn btn-primary btn-success">
+                        <a href="{% url 'main' %}" style="color:black">
+                            Volver al Menú Principal
+
                         </a>
                     </button>
-                </div>
-                <div class="text-bg-primary">
-                    <h2 class="h2">
-                        ¿ha concretado la compra?
-                    </h2>
-                    <form action="{% url 'realizarCompra' %}" method="post">
-                        {% csrf_token %}
-                        <label class="form-label">
-                            <ul>
-                                <li>
-                                    <input type="checkbox"
-                                        name="purchaseMade_{{cantidad}}_{{producto.id2}}_{{seller.Cedula}}"
-                                        id="purchaseMade_{{cantidad}}_{{producto}}_{{seller}}">
-                                    SI
-                                </li>
-                                <li>
-                                    <input type="checkbox" name="no" id="no">
-                                    NO
-                                </li>
-                            </ul>
-                            <br>
-                        </label>
-                        <button type="submit"
-                            class="btn btn-primary btn-dark">
-                            Aceptar
-                        </button>
-                    </form>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-2">
